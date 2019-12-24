@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Todos from "./components/Todos";
 import Header from "./components/Header";
 import AddTodo from "./components/AddTodo";
+import uuid from "uuid";
+import About from "./components/pages/About";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends Component {
   state = {
@@ -23,21 +26,42 @@ class App extends Component {
       }
     ]
   };
+
   render() {
     return (
-      <div className="App">
-        <div className="container">
-          <Header />
-          <AddTodo />
-          <Todos
-            todos={this.state.todos}
-            onToggleCheckbox={this.toggleTodoItem}
-            onDelete={this.deleteTodoItem}
-          />
+      <Router>
+        <div className="App">
+          <div className="container">
+            <Header />
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <React.Fragment>
+                  <AddTodo addTodo={this.addTodo} />
+                  <Todos
+                    todos={this.state.todos}
+                    onToggleCheckbox={this.toggleTodoItem}
+                    onDelete={this.deleteTodoItem}
+                  />
+                </React.Fragment>
+              )}
+            />
+            <Route path="/about" component={About} />
+          </div>
         </div>
-      </div>
+      </Router>
     );
   }
+
+  addTodo = title => {
+    const newTodo = {
+      id: uuid.v4(),
+      title,
+      completed: false
+    };
+    this.setState({ todos: [...this.state.todos, newTodo] });
+  };
 
   toggleTodoItem = id => {
     this.setState({

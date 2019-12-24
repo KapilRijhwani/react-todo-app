@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const headerStyle = {
@@ -8,9 +9,21 @@ const Header = () => {
     padding: "10px"
   };
 
+  const linkStyle = {
+    color: "#fff",
+    textDecoration: "none"
+  };
+
   return (
     <header style={headerStyle}>
       <h1>Todo List</h1>
+      <Link style={linkStyle} to="/">
+        Home
+      </Link>{" "}
+      |{" "}
+      <Link style={linkStyle} to="/about">
+        About
+      </Link>
     </header>
   );
 };
