@@ -25,14 +25,16 @@ class App extends Component {
   };
   render() {
     return (
-      <div>
-        <Header />
-        <AddTodo />
-        <Todos
-          todos={this.state.todos}
-          onToggleCheckbox={this.toggleTodoItem}
-          onDelete={this.deleteTodoItem}
-        />
+      <div className="App">
+        <div className="container">
+          <Header />
+          <AddTodo />
+          <Todos
+            todos={this.state.todos}
+            onToggleCheckbox={this.toggleTodoItem}
+            onDelete={this.deleteTodoItem}
+          />
+        </div>
       </div>
     );
   }
